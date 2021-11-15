@@ -31,6 +31,13 @@ function App() {
     fetchFromAPI();
   }, [fetchFromAPI]);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const filters = urlParams.get("filters");
+    console.log(window.location);
+    console.log("filters: ", filters);
+  }, [window.location]);
+
   return (
     <div className="App">
       <PageHeader />
