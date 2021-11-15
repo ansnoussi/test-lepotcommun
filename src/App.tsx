@@ -2,11 +2,13 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./styles/global.scss";
 import di from "./di";
 import PageHeader from "@components/pageHeader";
+import FilterCard from "@components/filterCard";
+import Card from "@components/card";
 
 function App() {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const [partnersList, setPartnersList] = useState<any>(null);
-  const [categoriesList, setCategoriesList] = useState<any>(null);
+  const [partnersList, setPartnersList] = useState<any>([]);
+  const [categoriesList, setCategoriesList] = useState<any>([]);
 
   const fetchFromAPI = useCallback(async () => {
     setIsLoading(true);
@@ -28,8 +30,14 @@ function App() {
   return (
     <div className="App">
       <PageHeader />
-      <p>Hello</p>
-      {isLoading ? <img src={"/images/loading.svg"} /> : null}
+      {isLoading ? (
+        <img src={"/images/loading.svg"} alt="loading" />
+      ) : (
+        <div className="MiddleContainer">
+          <FilterCard categoriesList={categoriesList} />
+          <Card />
+        </div>
+      )}
     </div>
   );
 }
