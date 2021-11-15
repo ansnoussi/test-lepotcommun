@@ -7,8 +7,20 @@
   min-height: 100vh;
 }
 
-.MiddleContainer {
+.AppContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.MiddleContainer {
+  max-width: 1100px;
+}
+
+.partnersContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @include media(s-device) {
+    grid-template-columns: 1fr;
+  }
 }

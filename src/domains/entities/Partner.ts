@@ -16,9 +16,15 @@ class Partner implements IPartnerEntity {
     this._id = params.partnerID;
     this._name = params.namePAR;
     this._desc = params.desc;
-    this._logoUrl = params.logoUrlPAR;
-    this._mobileImageUrl = params.mobileImageUrlPAR;
-    this._imageUrl = params.imageUrlPAR;
+    this._logoUrl = "https://recette2.lepotcommuntest.fr".concat(
+      params.logoUrlPAR
+    );
+    this._mobileImageUrl = "https://recette2.lepotcommuntest.fr".concat(
+      params.mobileImageUrlPAR
+    );
+    this._imageUrl = "https://recette2.lepotcommuntest.fr".concat(
+      params.imageUrlPAR
+    );
     this._url = params.urlPAR;
   }
 

@@ -2,7 +2,7 @@ import React from "react";
 import css from "./_filterCard.module.scss";
 import { IPartnerCategoryEntity } from "@domains/entities/interfaces/iPartnerCategory";
 
-const FilterCard = (prop: { categoriesList: [IPartnerCategoryEntity] }) => {
+const FilterCard = (prop: { categoriesList: IPartnerCategoryEntity[] }) => {
   return (
     <div className={css.filterCard}>
       <div className={`${css.categoryPill} ${css.categoryPillSelected}`}>
