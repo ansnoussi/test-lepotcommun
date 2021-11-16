@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import css from "./_filterCard.module.scss";
 import { IPartnerCategoryEntity } from "@domains/entities/interfaces/iPartnerCategory";
 
-const FilterCard = (prop: { categoriesList: IPartnerCategoryEntity[] }) => {
+const FilterCard = (prop: {
+  categoriesList: IPartnerCategoryEntity[];
+  update: () => void;
+}) => {
   const [filters, setFilters] = useState<string[]>([]);
 
   useEffect(() => {
@@ -15,7 +18,9 @@ const FilterCard = (prop: { categoriesList: IPartnerCategoryEntity[] }) => {
       window.location.pathname +
       "?" +
       searchParams.toString();
-    window.history.pushState({ path: newurl }, "", newurl);
+
+    window.history.pushState({}, "", newurl);
+    prop.update();
   }, [filters]);
 
   const toggleFilter = (id: string) => {

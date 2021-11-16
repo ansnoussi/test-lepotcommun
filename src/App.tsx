@@ -14,6 +14,8 @@ function App() {
     IPartnerCategoryEntity[] | []
   >([]);
 
+  const [selectedCategories, setSelectedCqtegories] = useState<string[]>([]);
+
   const fetchFromAPI = useCallback(async () => {
     setIsLoading(true);
 
@@ -31,12 +33,16 @@ function App() {
     fetchFromAPI();
   }, [fetchFromAPI]);
 
-  useEffect(() => {
+  const updateFilters = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const filters = urlParams.get("filters");
-    console.log(window.location);
-    console.log("filters: ", filters);
-  }, []);
+    let newFilter = filters ? filters.split("-") : [];
+    setSelectedCqtegories([...newFilter]);
+  };
+
+  useEffect(() => {
+    console.log(selectedCategories);
+  }, [selectedCategories]);
 
   return (
     <div className="App">
@@ -46,12 +52,25 @@ function App() {
           <img src={"/images/loading.svg"} alt="loading" />
         ) : (
           <div className="MiddleContainer">
-            <FilterCard categoriesList={categoriesList} />
+            <FilterCard
+              categoriesList={categoriesList}
+              update={updateFilters}
+            />
             <div className="partnersContainer">
-              {partnersList.map((partner: IPartnerEntity) => {
-                console.log(partner);
-                return <Card key={partner.id} partner={partner} />;
-              })}
+              {selectedCategories.length > 0
+                ? partnersList
+                    .filter(
+                      (p) =>
+                        p.categories.filter((value) =>
+                          selectedCategories.includes(value)
+                        ).length > 0
+                    )
+                    .map((partner: IPartnerEntity) => {
+                      return <Card key={partner.id} partner={partner} />;
+                    })
+                : partnersList.map((partner: IPartnerEntity) => {
+                    return <Card key={partner.id} partner={partner} />;
+                  })}
             </div>
           </div>
         )}
