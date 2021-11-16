@@ -36,7 +36,7 @@ function App() {
     const filters = urlParams.get("filters");
     console.log(window.location);
     console.log("filters: ", filters);
-  }, [window.location]);
+  }, []);
 
   return (
     <div className="App">
@@ -48,9 +48,10 @@ function App() {
           <div className="MiddleContainer">
             <FilterCard categoriesList={categoriesList} />
             <div className="partnersContainer">
-              {partnersList.map((partner: IPartnerEntity) => (
-                <Card key={partner.id} partner={partner} />
-              ))}
+              {partnersList.map((partner: IPartnerEntity) => {
+                console.log(partner);
+                return <Card key={partner.id} partner={partner} />;
+              })}
             </div>
           </div>
         )}
